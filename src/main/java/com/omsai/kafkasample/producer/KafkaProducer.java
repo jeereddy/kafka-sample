@@ -1,12 +1,10 @@
 package com.omsai.kafkasample.producer;
 
 import com.omsai.kafkasample.pojo.User;
-import com.omsai.kafkasample.utils.AppConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
@@ -19,6 +17,9 @@ public class KafkaProducer {
 
     @Value("${spring.kafka.topic.name}")
     private String topicName;
+
+    @Value("${spring.kafka.topic-json.name}")
+    private String topicJsonName;
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
@@ -38,7 +39,7 @@ public class KafkaProducer {
         automatically be transformed into a JSON byte[].*/
         LOGGER.info(String.format("Message sent -> %s", user.toString()));
         Message<User> message = MessageBuilder.withPayload(user)
-                .setHeader(KafkaHeaders.TOPIC, AppConstants.TOPIC_NAME_TWO).build();
+                .setHeader(KafkaHeaders.TOPIC, topicJsonName).build();
         kafkaTemplateUser.send(message);
     }
 }

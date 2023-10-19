@@ -1,7 +1,6 @@
 package com.omsai.kafkasample.consumer;
 
 import com.omsai.kafkasample.pojo.User;
-import com.omsai.kafkasample.utils.AppConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -16,7 +15,7 @@ public class KafkaConsumer {
         LOGGER.info(String.format("Message received -> %s", message));
     }
 
-    @KafkaListener(topics = AppConstants.TOPIC_NAME_TWO, groupId = AppConstants.GROUP_ID)
+    @KafkaListener(topics = "spring.kafka.topic-json.name", groupId = "spring.kafka.consumer.group-id")
     public void consumeUser(User user){
         LOGGER.info(String.format("Message received -> %s", user.toString()));
     }
