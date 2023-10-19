@@ -14,3 +14,7 @@ Let's run the Spring boot application and have the demo. Make sure that Zookeepe
 Open a browser and hit the below link to call a REST API:
 
 http://localhost:8080/api/v1/kafka/publish?message=hello%20world
+
+Well, the User instance will be serialized by JsonSerializer to a byte array. Kafka finally stores this byte array into the given partition of the particular topic.
+
+During deserialization, JsonDeserializer is used to receive JSON from Kafka as a byte array, convert it JSON byte array to the User object, and return it to the application.
